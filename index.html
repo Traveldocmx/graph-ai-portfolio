@@ -642,6 +642,17 @@
       letter-spacing: 0.04em;
     }
 
+    /* Week card link styling (added for published submissions) */
+    .week .slot a{
+      color: rgba(234,240,255,0.92);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1px;
+    }
+    .week .slot a:hover{
+      color: rgba(255,255,255,1);
+    }
+
     .footer{
       padding: 3.4rem 1.25rem 4rem;
       border-top: 1px solid rgba(255,255,255,0.10);
@@ -946,11 +957,19 @@
           <p>Foundations: tools, responsible prompting, and structured outputs.</p>
           <div class="slot">Link: <em>to be added</em></div>
         </div>
+
+        <!-- UPDATED: Week 2 now links to your project page -->
         <div class="week">
-          <div class="top"><div class="w">Week 2</div><div class="status todo">Placeholder</div></div>
-          <p>Automated analysis: reproducible workflows and integrity checks.</p>
-          <div class="slot">Link: <em>to be added</em></div>
+          <div class="top"><div class="w">Week 2</div><div class="status ready">Published</div></div>
+          <p>Workshop 2: Automated data analysis (Gapminder indicators explored using AI tools).</p>
+          <div class="slot">
+            Link:
+            <a href="week_2_workshop.html" aria-label="Open Workshop 2: Automated data analysis">
+              Workshop 2: Automated data analysis
+            </a>
+          </div>
         </div>
+
         <div class="week">
           <div class="top"><div class="w">Week 3</div><div class="status todo">Placeholder</div></div>
           <p>Literature pipelines: search, screening, synthesis, and audit trails.</p>
@@ -959,106 +978,4 @@
         <div class="week">
           <div class="top"><div class="w">Week 4</div><div class="status todo">Placeholder</div></div>
           <p>Custom assistants: scoped knowledge, retrieval patterns, safeguards.</p>
-          <div class="slot">Link: <em>to be added</em></div>
-        </div>
-        <div class="week">
-          <div class="top"><div class="w">Week 5</div><div class="status todo">Placeholder</div></div>
-          <p>Automation: task orchestration, agents, and responsible boundaries.</p>
-          <div class="slot">Link: <em>to be added</em></div>
-        </div>
-        <div class="week">
-          <div class="top"><div class="w">Week 6</div><div class="status todo">Placeholder</div></div>
-          <p>Communication: figures, summaries, and research outreach assets.</p>
-          <div class="slot">Link: <em>to be added</em></div>
-        </div>
-        <div class="week">
-          <div class="top"><div class="w">Week 7</div><div class="status todo">Placeholder</div></div>
-          <p>Integration week: refine system design and prepare capstone.</p>
-          <div class="slot">Link: <em>to be added</em></div>
-        </div>
-        <div class="week">
-          <div class="top"><div class="w">Capstone</div><div class="status ready">Plan</div></div>
-          <p>Applied final project: a practical AI workflow/tool for real work.</p>
-          <div class="slot">Link: <em>to be added</em></div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer" role="contentinfo">
-    <div class="footer-inner">
-      <div class="fine">© <span id="year"></span> · Personal learning portfolio · No email shown (spam-safe)</div>
-      <div class="links" aria-label="External links">
-        <a class="iconbtn" href="https://www.linkedin.com/in/traveldocmx" target="_blank" rel="noreferrer" aria-label="LinkedIn">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M6.94 8.5H4.2V20h2.74V8.5ZM5.57 4a1.58 1.58 0 1 0 0 3.16A1.58 1.58 0 0 0 5.57 4ZM20 20h-2.73v-6.05c0-1.44-.03-3.29-2-3.29-2 0-2.3 1.56-2.3 3.18V20H10.2V8.5h2.63v1.57h.04c.36-.7 1.25-1.44 2.57-1.44 2.74 0 3.25 1.8 3.25 4.14V20Z" fill="rgba(234,240,255,0.9)"/>
-          </svg>
-        </a>
-        <a class="iconbtn" href="https://orcid.org/0000-0003-2158-831X" target="_blank" rel="noreferrer" aria-label="ORCID">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M7.2 6.5h1.9V20H7.2V6.5ZM6.2 5.1a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4ZM11 6.5h4.7c3.5 0 5.9 2.5 5.9 6.7 0 4.2-2.4 6.8-5.9 6.8H11V6.5Zm2 1.8V18.2h2.5c2.3 0 4-1.7 4-5 0-3.3-1.7-4.9-4-4.9H13Z" fill="rgba(234,240,255,0.9)"/>
-          </svg>
-        </a>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    // -----------------------------
-    // Small, intentional JS only:
-    // - Mobile menu toggle
-    // - Active section highlighting
-    // - Close drawer on navigation
-    // - Current year
-    // -----------------------------
-
-    const burger = document.getElementById('burger');
-    const drawer = document.getElementById('drawer');
-
-    function setDrawer(open){
-      if(!drawer) return;
-      drawer.style.display = open ? 'block' : 'none';
-      burger?.setAttribute('aria-expanded', open ? 'true' : 'false');
-    }
-
-    burger?.addEventListener('click', () => {
-      const isOpen = burger.getAttribute('aria-expanded') === 'true';
-      setDrawer(!isOpen);
-    });
-
-    // Close drawer when clicking a link
-    document.querySelectorAll('[data-nav-m]').forEach(a => {
-      a.addEventListener('click', () => setDrawer(false));
-    });
-
-    // Active nav highlight on scroll
-    const navLinks = Array.from(document.querySelectorAll('[data-nav]'));
-    const sections = navLinks
-      .map(a => document.querySelector(a.getAttribute('href')))
-      .filter(Boolean);
-
-    const obs = new IntersectionObserver((entries) => {
-      // pick the most visible intersecting section
-      const visible = entries
-        .filter(e => e.isIntersecting)
-        .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
-      if(!visible) return;
-
-      navLinks.forEach(a => a.classList.remove('active'));
-      const id = '#' + visible.target.id;
-      const active = navLinks.find(a => a.getAttribute('href') === id);
-      active?.classList.add('active');
-    }, { root: null, threshold: [0.25, 0.45, 0.65] });
-
-    sections.forEach(s => obs.observe(s));
-
-    // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Defensive: close menu if user resizes up
-    window.addEventListener('resize', () => {
-      if(window.innerWidth > 980) setDrawer(false);
-    });
-  </script>
-</body>
-</html>
+          <div class="slot">Link
