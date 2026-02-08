@@ -719,6 +719,177 @@
       .hero{min-height: 74vh;}
       .headline{letter-spacing: 0.01em;}
     }
+  
+
+    /* -----------------------------
+       Embedded chat panel (Botpress)
+       - Requires Botpress Webchat Deploy Settings: Chat interface = Embedded
+       - Element ID should match: bp-embedded-webchat
+       ----------------------------- */
+
+    .chat-overlay{
+      position: fixed;
+      inset: 0;
+      background: rgba(2,6,23,0.42);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 180ms ease;
+      z-index: 80;
+    }
+
+    .chat-panel{
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 100vh;
+      width: min(460px, 100%);
+      background: rgba(255,255,255,0.98);
+      color: var(--ink);
+      box-shadow: 0 28px 90px rgba(2,6,23,0.35);
+      transform: translateX(102%);
+      transition: transform 220ms ease;
+      z-index: 90;
+      display: flex;
+      flex-direction: column;
+    }
+
+    body.chat-open .chat-overlay{
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    body.chat-open .chat-panel{
+      transform: translateX(0);
+    }
+
+    .chat-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 0.75rem;
+      padding: 1rem 1rem;
+      border-bottom: 1px solid rgba(15,23,42,0.10);
+      background: linear-gradient(180deg, rgba(93, 81, 163, 0.06), rgba(255,255,255,0));
+    }
+
+    .chat-title{
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.92rem;
+    }
+
+    .chat-sub{
+      margin-top: 0.18rem;
+      color: rgba(15,23,42,0.70);
+      font-size: 0.92rem;
+      letter-spacing: 0.01em;
+    }
+
+    .chat-close{
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      border: 1px solid rgba(15,23,42,0.10);
+      background: rgba(2,6,23,0.02);
+      cursor: pointer;
+      color: rgba(15,23,42,0.85);
+      font-size: 1.1rem;
+      line-height: 1;
+    }
+    .chat-close:hover{background: rgba(2,6,23,0.04);}
+
+    .chat-body{
+      padding: 0.9rem 0.9rem 1rem;
+      flex: 1;
+      display:flex;
+      flex-direction:column;
+      gap: 0.75rem;
+      min-height: 0;
+    }
+
+    /* The embedding target */
+    #bp-embedded-webchat{
+      position: relative;
+      flex: 1;
+      min-height: 520px;
+      border-radius: 16px;
+      border: 1px solid rgba(15,23,42,0.10);
+      overflow: hidden;
+      background: rgba(2,6,23,0.02);
+    }
+
+    /* Botpress: hide floating launcher if present */
+    .bpFab{display:none !important;}
+
+    /* Botpress: make webchat fill the container (per Botpress docs) */
+    #bp-embedded-webchat .bpWebchat{
+      position: absolute !important;
+      top: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      bottom: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      max-height: 100% !important;
+    }
+
+    .chat-fallback{
+      display:none;
+      border-radius: 16px;
+      border: 1px solid rgba(15,23,42,0.10);
+      background: rgba(2,6,23,0.02);
+      padding: 0.9rem;
+      color: rgba(15,23,42,0.78);
+      font-size: 0.95rem;
+      line-height: 1.45;
+    }
+
+    .chat-fallback code{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.92em;
+    }
+
+    @media (max-width: 560px){
+      #bp-embedded-webchat{min-height: 62vh;}
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .chat-overlay, .chat-panel{transition: none;}
+    }
+
+  
+
+    /* -----------------------------
+       Instructor block (About)
+       ----------------------------- */
+
+    .instructor{
+      display:flex;
+      align-items:flex-start;
+      gap: 1.15rem;
+      margin-top: 0.95rem;
+    }
+
+    .instructor-photo{
+      width: 116px;
+      height: 116px;
+      border-radius: 18px;
+      object-fit: cover;
+      border: 1px solid rgba(15,23,42,0.10);
+      box-shadow: 0 18px 50px rgba(2,6,23,0.16);
+      background: rgba(2,6,23,0.02);
+      flex: 0 0 auto;
+    }
+
+    .instructor-text p{margin-top: 0.2rem;}
+    .instructor-text .bullets{margin-top: 0.9rem;}
+
+    @media (max-width: 560px){
+      .instructor{flex-direction:column;}
+      .instructor-photo{width: 108px; height: 108px;}
+    }
+
   </style>
 </head>
 
@@ -869,46 +1040,65 @@
     <section class="wrap" id="about">
       <div class="section-head">
         <div>
-          <div class="h2">About Me</div>
+          <div class="h2">Meet your instructor</div>
           <div class="rule"></div>
         </div>
         <div class="hint">
-          Infectious diseases physician working at the interface of clinical decision-making, outbreak operations, and evidence synthesis.
+          Practical, responsible GenAI workflows for clinicians and academics—built around evidence, transparency, and real-world constraints.
         </div>
       </div>
 
       <div class="grid-2">
         <div class="panel">
-          <h3>Profile</h3>
-          <p>
-            I’m an infectious diseases physician with experience in acute health emergencies, outbreak response, and technical support to public health programs.
-            In this course portfolio, I focus on how GenAI can improve speed and consistency while preserving transparent, auditable methods.
-          </p>
+          <h3>Dr. Rodrigo Ville</h3>
 
-          <ul class="bullets" aria-label="Highlights">
-            <li>Outbreak preparedness and response work in dengue, malaria, mpox, rabies, and viral hepatitis.</li>
-            <li>Evidence synthesis and structured reporting for clinical and public health decision-makers.</li>
-            <li>Workflow design: reliable prompts, templates, and automation patterns for routine research tasks.</li>
-          </ul>
+          <div class="instructor">
+            <img
+              class="instructor-photo"
+              src="https://raw.githubusercontent.com/Traveldocmx/graph-ai-portfolio/main/Photo%20Rodrigo%20Ville.jpg"
+              alt="Portrait of Dr. Rodrigo Ville"
+              loading="lazy"
+              decoding="async"
+            />
 
-          <div class="chips" aria-label="Domains">
-            <span class="chip">Clinical decision support</span>
-            <span class="chip">Outbreak operations</span>
-            <span class="chip">Evidence synthesis</span>
-            <span class="chip">Applied epidemiology</span>
-            <span class="chip">Responsible GenAI</span>
+            <div class="instructor-text">
+              <p>
+                Dr. Rodrigo Ville is an infectious diseases physician with experience supporting public health programs and
+                responding to acute health emergencies. His work sits at the intersection of clinical decision-making, outbreak
+                operations, and applied epidemiology.
+              </p>
+              <p>
+                In this portfolio, he demonstrates how LLMs can be used <em>responsibly</em> to accelerate research and professional
+                workflows—without compromising rigor, privacy, or scientific integrity.
+              </p>
+
+              <ul class="bullets" aria-label="Instructor highlights">
+                <li>Outbreak work across dengue, malaria, mpox, rabies, viral hepatitis, and COVID-19 response operations.</li>
+                <li>Technical advisory support for surveillance, preparedness, and risk analysis in public health settings.</li>
+                <li>High-stakes communication: clinical summaries, guideline-style writing, and stakeholder-ready outputs.</li>
+              </ul>
+
+              <div class="chips" aria-label="Domains">
+                <span class="chip">Clinical infectious diseases</span>
+                <span class="chip">Outbreak preparedness</span>
+                <span class="chip">Applied epidemiology</span>
+                <span class="chip">Evidence synthesis</span>
+                <span class="chip">Scientific communication</span>
+              </div>
+            </div>
           </div>
         </div>
 
         <div class="panel">
-          <h3>Why this course</h3>
+          <h3>How he helps clients</h3>
           <p>
-            My goal is a practical toolkit for clinicians and academics: faster drafting, cleaner analysis, and better communication—without compromising safety, privacy, or scientific rigor.
+            Dr. Rodrigo works with private healthcare professionals and academic individuals to turn complex questions into
+            clear, defensible outputs—documents, analyses, and workflows that can be audited and reused.
           </p>
-          <ul class="bullets" aria-label="Intent">
-            <li>Build reusable templates for analysis, synthesis, and reporting.</li>
-            <li>Produce research-ready deliverables with clear provenance.</li>
-            <li>Prototype no-code automation for repetitive tasks safely.</li>
+          <ul class="bullets" aria-label="Client outcomes">
+            <li>Convert messy inputs into structured notes, protocols, and report-ready narratives.</li>
+            <li>Build repeatable AI-assisted pipelines for literature screening, extraction, and synthesis.</li>
+            <li>Create clean figures and stakeholder-facing materials with transparent assumptions and limitations.</li>
           </ul>
         </div>
       </div>
@@ -1075,6 +1265,31 @@
     </section>
   </main>
 
+  <!-- Embedded chat panel (opens from "Ask questions about the work") -->
+  <div class="chat-overlay" id="chatOverlay" aria-hidden="true"></div>
+  <aside class="chat-panel" id="chatPanel" aria-label="Chat assistant" aria-hidden="true">
+    <div class="chat-head">
+      <div>
+        <div class="chat-title">Assistant</div>
+        <div class="chat-sub">Ask questions about the work</div>
+      </div>
+      <button class="chat-close" id="chatClose" type="button" aria-label="Close chat">×</button>
+    </div>
+
+    <div class="chat-body">
+      <!-- IMPORTANT: This ID must match your Botpress Webchat "Element ID" (Deploy Settings → Chat interface → Embedded) -->
+      <div id="bp-embedded-webchat" aria-label="Embedded webchat"></div>
+
+      <div class="chat-fallback" id="chatFallback" role="note">
+        <strong>Chat not showing?</strong>
+        <div style="margin-top:0.35rem;">
+          In Botpress Dashboard → <em>Webchat</em> → <em>Deploy Settings</em>, set <em>Chat interface</em> to <strong>Embedded</strong>, and set <em>Element ID</em> to
+          <code>bp-embedded-webchat</code>, then publish changes.
+        </div>
+      </div>
+    </div>
+  </aside>
+
   <footer class="footer" role="contentinfo">
     <div class="footer-inner">
       <div class="fine">
@@ -1198,31 +1413,55 @@
       wire(topSearch);
       wire(filter);
 
-      // Chat open helpers (Botpress)
-      function openChat() {
-        try {
-          var bp = window.botpressWebChat;
-          if (bp) {
-            if (typeof bp.sendEvent === "function") {
-              // show/open (both are commonly supported depending on embed)
-              bp.sendEvent({ type: "show" });
-              bp.sendEvent({ type: "open" });
-              return;
-            }
-            if (typeof bp.open === "function") { bp.open(); return; }
-            if (typeof bp.toggle === "function") { bp.toggle(); return; }
-          }
-        } catch (e) {}
-        // Fallback if widget hasn’t finished loading
-        alert("Chat is still loading. Please try again in a moment.");
+      // Chat panel (embedded Botpress)
+      var chatPanel = document.getElementById("chatPanel");
+      var chatOverlay = document.getElementById("chatOverlay");
+      var chatClose = document.getElementById("chatClose");
+      var chatFallback = document.getElementById("chatFallback");
+
+      function openChatPanel() {
+        document.body.classList.add("chat-open");
+        if (chatPanel) chatPanel.setAttribute("aria-hidden", "false");
+        if (chatOverlay) chatOverlay.setAttribute("aria-hidden", "false");
+
+        // If the embedded chat doesn't render (wrong element ID / deploy settings), show a helpful hint.
+        window.setTimeout(function () {
+          var container = document.getElementById("bp-embedded-webchat");
+          if (!container || !chatFallback) return;
+          var hasContent = container.children && container.children.length > 0;
+          chatFallback.style.display = hasContent ? "none" : "block";
+        }, 700);
+
+        // Focus close button for accessibility
+        if (chatClose) chatClose.focus();
       }
 
+      function closeChatPanel() {
+        document.body.classList.remove("chat-open");
+        if (chatPanel) chatPanel.setAttribute("aria-hidden", "true");
+        if (chatOverlay) chatOverlay.setAttribute("aria-hidden", "true");
+      }
+
+      // Wire chat buttons
       var chatOpen = document.getElementById("chatOpen");
       var chatPill = document.getElementById("chatPill");
       var chatDrawer = document.getElementById("chatDrawer");
-      if (chatOpen) chatOpen.addEventListener("click", openChat);
-      if (chatPill) chatPill.addEventListener("click", openChat);
-      if (chatDrawer) chatDrawer.addEventListener("click", function () { closeDrawer(); openChat(); });
+      if (chatOpen) chatOpen.addEventListener("click", openChatPanel);
+      if (chatPill) chatPill.addEventListener("click", openChatPanel);
+      if (chatDrawer) chatDrawer.addEventListener("click", function () { closeDrawer(); openChatPanel(); });
+
+      if (chatClose) chatClose.addEventListener("click", closeChatPanel);
+      if (chatOverlay) chatOverlay.addEventListener("click", closeChatPanel);
+
+      // Close on Escape (chat first, then drawer)
+      document.addEventListener("keydown", function (e) {
+        if (e.key !== "Escape") return;
+        if (document.body.classList.contains("chat-open")) {
+          closeChatPanel();
+        } else {
+          closeDrawer();
+        }
+      });
 
       // If user presses Enter in header search, jump to submissions
       if (topSearch) {
